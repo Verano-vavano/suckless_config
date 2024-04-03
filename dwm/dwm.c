@@ -1584,15 +1584,31 @@ quit(const Arg *arg)
 {
 	size_t i;
 
-	/* kill child processes */
-	for (i = 0; i < autostart_len; i++) {
-		if (0 < autostart_pids[i]) {
-			kill(autostart_pids[i], SIGTERM);
-			waitpid(autostart_pids[i], NULL, 0);
-		}
+	FILE *fd = NULL;
+	struct stat filestat;
+
+	if ((fd = fopen(lockfile, "r")) && stat(lockfile, &filestat) == 0) {
+		fclose(fd);
+
+		if (filestat.st_ctime <= time(NULL)-2)
+			remove(lockfile);
 	}
 
-	running = 0;
+	if ((fd = fopen(lockfile, "r")) != NULL) {
+		fclose(fd);
+		remove(lockfile);
+		/* kill child processes */
+		for (i = 0; i < autostart_len; i++) {
+			if (0 < autostart_pids[i]) {
+				kill(autostart_pids[i], SIGTERM);
+				waitpid(autostart_pids[i], NULL, 0);
+			}
+		}
+		running = 0;
+	} else {
+		if ((fd = fopen(lockfile, "a")) != NULL)
+			fclose(fd);
+	}
 }
 
 Monitor *
