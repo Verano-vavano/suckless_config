@@ -3,6 +3,7 @@
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int fborderpx = 1;        /* border pixel of floating windows */
+static const unsigned int gappx     = 5;        /* gaps between windows */
 static const unsigned int tabModKey = 0x40;
 static const unsigned int tabCycleKey = 0x17;
 static const unsigned int snap      = 32;       /* snap pixel */
@@ -134,6 +135,10 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 	{ MODKEY,                       XK_o,      winview,        {0} },
 	{ Mod1Mask,                     XK_Tab,    alttab,         {0} },
+	{ MODKEY|ControlMask,           XK_space,  focusmaster,    {0} },
+	{ MODKEY,                       XK_minus,  setgaps,        {.i = -1 } },
+	{ MODKEY,                       XK_equal,  setgaps,        {.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_equal,  setgaps,        {.i = 0  } },
 };
 
 /* button definitions */
