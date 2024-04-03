@@ -2,3 +2,4 @@
 *.orig
 *.o
 dwm/dwm
+dwm/config.h
