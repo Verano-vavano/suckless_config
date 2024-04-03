@@ -1,3 +1,4 @@
 *.rej
 *.orig
 *.o
+dwm/dwm
