@@ -64,6 +64,7 @@ static const int attachdirection = 4;    /* 0 default, 1 above, 2 aside, 3 below
 static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
 
 #include "fibonacci.c"
+#include "movestack.c"
 static const Layout layouts[] = {
 	/* symbol     arrange function */
 	{ "[]=",      tile },    /* first entry is default */
@@ -100,6 +101,8 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
+	{ MODKEY|ControlMask,             XK_j,      movestack,      {.i = +1 } },
+	{ MODKEY|ControlMask,             XK_k,      movestack,      {.i = -1 } },
 	{ MODKEY,                       XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
@@ -113,6 +116,7 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY|ShiftMask,             XK_f,      togglefullscr,  {0} },
+	{ MODKEY|ControlMask,           XK_r,      reorganizetags, {0} },
 	{ MODKEY,                       XK_agrave,      view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_agrave,      tag,            {.ui = ~0 } },
 	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
