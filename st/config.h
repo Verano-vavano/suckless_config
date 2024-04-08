@@ -256,6 +256,7 @@ static Shortcut shortcuts[] = {
 	{ MODKEY,               XK_ccedilla,    selectscheme,   {.i =  8} },
 	{ MODKEY,               XK_agrave,      nextscheme,     {.i = +1} },
 	{ MODKEY|ControlMask,   XK_agrave,      nextscheme,     {.i = -1} },
+	{ TERMMOD,              XK_X,           invert,         { }       },
 };
 
 /*

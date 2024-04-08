@@ -3,3 +3,5 @@
 *.o
 dwm/dwm
 dwm/config.h
+st/st
+st/config.h
